@@ -1,0 +1,112 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+
+  font-weight: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: var(--pal-color-a-750) transparent;
+}
+
+:root {
+  --line-thickness: 0.0625rem;
+  --pill-radius: 100rem;
+  --transition-dummy: outline-width 0s;
+}
+
+html {
+  font-size: clamp(14px, 3.75vw, 16px);
+  text-rendering: optimizeLegibility;
+
+  background-color: var(--pal-color-a-850);
+}
+
+::selection {
+  color: var(--pal-color-white);
+  background-color: var(--pal-color-a-600);
+}
+
+:is(h1, h2, h3, h4),
+:is(h1, h2, h3, h4) > * {
+  line-height: 1.5;
+  font-weight: 800;
+  text-wrap: balance;
+}
+
+:is(h2, h3, h4),
+:is(h2, h3, h4) > * {
+  font-weight: 600;
+}
+
+h1 {
+  font-size: clamp(var(--pal-size-font-xl), 7.5vw, 3rem);
+}
+
+h2 {
+  font-size: clamp(var(--pal-size-font-l), 5vw, var(--pal-size-font-xl));
+}
+
+h3 {
+  font-size: var(--pal-size-font-m);
+}
+
+small {
+  font-size: var(--pal-size-font-2xs);
+}
+
+strong {
+  font-weight: 600;
+}
+
+ul,
+ol {
+  display: flex;
+  list-style: none;
+}
+
+hr {
+  border: none;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+span {
+  display: inline-block;
+}
+
+a {
+  text-decoration: none;
+}
+
+input,
+textarea {
+  border: none;
+  min-width: 0;
+
+  line-height: normal;
+
+  background: transparent;
+  outline: none;
+
+  &::placeholder {
+    color: inherit;
+    opacity: 0.5;
+  }
+}
+
+select {
+  cursor: pointer;
+}
+
+button {
+  border: none;
+
+  background-color: transparent;
+  cursor: pointer;
+}

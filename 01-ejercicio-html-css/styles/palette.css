@@ -1,0 +1,117 @@
+@font-face {
+  font-family: 'Inter Variable';
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+  src: url(https://cdn.jsdelivr.net/fontsource/fonts/inter:vf@latest/latin-wght-normal.woff2)
+    format('woff2-variations');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+  /* FONT */
+
+  --pal-font-a: 'Inter Variable', sans-serif;
+
+  /* FONT SIZE */
+
+  --pal-size-font-2xs: 0.6875rem;
+  --pal-size-font-xs: 0.8125rem;
+  --pal-size-font-s: 1rem;
+  --pal-size-font-m: 1.25rem;
+  --pal-size-font-l: 1.5rem;
+  --pal-size-font-xl: 2rem;
+  --pal-size-font-2xl: 2.5rem;
+  --pal-size-font-3xl: 4rem;
+
+  /* SIZE */
+
+  --pal-size-3xs: 0.125rem;
+  --pal-size-2xs: 0.25rem;
+  --pal-size-xs: 0.5rem;
+  --pal-size-s: 0.75rem;
+  --pal-size-m: 1rem;
+  --pal-size-l: 1.5rem;
+  --pal-size-xl: 2rem;
+  --pal-size-2xl: 2.5rem;
+  --pal-size-3xl: 5rem;
+
+  /* COLOR */
+
+  --pal-color-a-50: #f2f8fd;
+  --pal-color-a-100: #d7eaf9;
+  --pal-color-a-150: #bcdcf6;
+  --pal-color-a-200: #a2cdf2;
+  --pal-color-a-250: #87bfee;
+  --pal-color-a-300: #6cb0ea;
+  --pal-color-a-350: #51a2e6;
+  --pal-color-a-400: #3694e3;
+  --pal-color-a-450: #1b85df;
+  --pal-color-a-500: #0077db;
+  --pal-color-a-550: #0963bb;
+  --pal-color-a-600: #10539c;
+  --pal-color-a-650: #154480;
+  --pal-color-a-700: #183867;
+  --pal-color-a-750: #182d4f;
+  --pal-color-a-800: #17223a;
+  --pal-color-a-850: #131926;
+  --pal-color-a-900: #0d0f15;
+  --pal-color-a-950: #050506;
+
+  --pal-color-b-500: #00ff2b;
+
+  --pal-color-white: #fff;
+  --pal-color-black: #000;
+
+  /* TIME */
+
+  --pal-time-xs: 0.1s;
+  --pal-time-s: 0.2s;
+  --pal-time-m: 0.4s;
+  --pal-time-l: 1s;
+  --pal-time-xl: 2s;
+
+  /* TIMING FUNCTION */
+
+  --pal-timing-func-a: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+  /* MISC */
+
+  --pal-shadow-0: 0.3px 0.5px 0.7px rgba(0, 0, 0, 0.1),
+    0.4px 0.8px 1px rgba(0, 0, 0, 0.1), 1px 2px 2.5px rgba(0, 0, 0, 0.1);
+  --pal-shadow-1: 0.3px 0.5px 0.7px rgba(0, 0, 0, 0.09),
+    0.7px 1.3px 1.7px rgba(0, 0, 0, 0.09), 1.3px 2.6px 3.3px rgba(0, 0, 0, 0.09),
+    2.6px 5.2px 6.5px rgba(0, 0, 0, 0.09), 5px 10px 12.6px rgba(0, 0, 0, 0.09);
+  --pal-shadow-2: 0.3px 0.5px 0.7px rgba(0, 0, 0, 0.08),
+    1.2px 2.4px 3px rgba(0, 0, 0, 0.08), 2.1px 4.3px 5.4px rgba(0, 0, 0, 0.08),
+    3.2px 6.5px 8.2px rgba(0, 0, 0, 0.08),
+    4.7px 9.4px 11.8px rgba(0, 0, 0, 0.08),
+    6.8px 13.6px 17.1px rgba(0, 0, 0, 0.08),
+    9.6px 19.3px 24.3px rgba(0, 0, 0, 0.08),
+    13.5px 27px 34px rgba(0, 0, 0, 0.08),
+    18.5px 37.1px 46.6px rgba(0, 0, 0, 0.08),
+    25px 50px 62.9px rgba(0, 0, 0, 0.08);
+
+  --pal-shadow-drop-0: drop-shadow(0.3px 0.5px 0.7px rgba(0, 0, 0, 0.1))
+    drop-shadow(0.4px 0.8px 1px rgba(0, 0, 0, 0.1))
+    drop-shadow(1px 2px 2.5px rgba(0, 0, 0, 0.1));
+
+  --pal-shadow-drop-1: drop-shadow(0.3px 0.5px 0.7px rgba(0, 0, 0, 0.09))
+    drop-shadow(0.7px 1.3px 1.7px rgba(0, 0, 0, 0.09))
+    drop-shadow(1.3px 2.6px 3.3px rgba(0, 0, 0, 0.09))
+    drop-shadow(2.6px 5.2px 6.5px rgba(0, 0, 0, 0.09))
+    drop-shadow(5px 10px 12.6px rgba(0, 0, 0, 0.09));
+
+  --pal-shadow-drop-2: drop-shadow(0.3px 0.5px 0.7px rgba(0, 0, 0, 0.08))
+    drop-shadow(1.2px 2.4px 3px rgba(0, 0, 0, 0.08))
+    drop-shadow(2.1px 4.3px 5.4px rgba(0, 0, 0, 0.08))
+    drop-shadow(3.2px 6.5px 8.2px rgba(0, 0, 0, 0.08))
+    drop-shadow(4.7px 9.4px 11.8px rgba(0, 0, 0, 0.08))
+    drop-shadow(6.8px 13.6px 17.1px rgba(0, 0, 0, 0.08))
+    drop-shadow(9.6px 19.3px 24.3px rgba(0, 0, 0, 0.08))
+    drop-shadow(13.5px 27px 34px rgba(0, 0, 0, 0.08))
+    drop-shadow(18.5px 37.1px 46.6px rgba(0, 0, 0, 0.08))
+    drop-shadow(25px 50px 62.9px rgba(0, 0, 0, 0.08));
+}
