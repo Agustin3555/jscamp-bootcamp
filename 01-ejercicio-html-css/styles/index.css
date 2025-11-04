@@ -448,11 +448,12 @@ body {
       display: flex;
       flex-direction: column;
       border: var(--line-thickness) solid var(--pal-color-a-750);
+      list-style: none;
 
       border-radius: var(--pal-size-xs);
       overflow: hidden;
 
-      > a {
+      li > a > article {
         border-bottom: var(--line-thickness) solid var(--pal-color-a-750);
         padding: var(--pal-size-l);
 
@@ -481,13 +482,13 @@ body {
           background-color: var(--pal-color-a-800);
         }
 
-        &:last-child {
-          border: none;
-        }
-
         > p {
           opacity: 0.75;
         }
+      }
+
+      li:last-child > a > article {
+        border-bottom: none;
       }
     }
 
