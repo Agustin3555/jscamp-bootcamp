@@ -17,7 +17,8 @@ if (
   noResultsBanner
 ) {
   const filterJobs = () => {
-    const titleSearched = searchInput.value.toLocaleLowerCase()
+    // agregamos un .trim() por si el usuario ingresa espacios vacíos
+    const titleSearched = searchInput.value.toLocaleLowerCase().trim()
     const selectedTechnology = technologyFilter.value
     const selectedLocation = locationFilter.value
     const selectedExperienceLevel = experienceLevelFilter.value
@@ -29,9 +30,16 @@ if (
       const { technology, location, level } = job.dataset
       const title = job.querySelector('h3')?.textContent.toLocaleLowerCase()
 
+      // hacemos un split para convertir la cadena en un array de tecnologías. Esto es porque:
+      // si buscamos por texto, y seleccionamos `java`, nos dará resultados tanto de `java` como `javascript`.
+      // Porque el texto `java` está dentro de `javascript`.
+      // Al hacer un .split(), nos aseguramos que cada tecnología sea evaluada individualmente.
+      // Esto evita que `java` coincida con `javascript` solo por contener la subcadena `java`.
+      const listOfTechnologies = technology.split(',');
+
       const match = [
         titleSearched === '' || title.includes(titleSearched),
-        selectedTechnology === '' || technology.includes(selectedTechnology),
+        selectedTechnology === '' || listOfTechnologies.includes(selectedTechnology),
         selectedLocation === '' || location === selectedLocation,
         selectedExperienceLevel === '' || level === selectedExperienceLevel,
       ].every(v => v)
@@ -45,7 +53,7 @@ if (
   }
 
   searchForm.addEventListener('change', filterJobs)
-  searchForm.addEventListener('submit', e => e.preventDefault())
+  searchForm.addEventListener('submit', e => e.preventDefault()) // Excelente idea!
   searchForm.addEventListener('reset', () => setTimeout(() => filterJobs()))
 
   searchInput.addEventListener('input', filterJobs)
