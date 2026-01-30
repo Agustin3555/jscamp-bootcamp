@@ -1,0 +1,33 @@
+.cmp-job-card > article {
+  border-bottom: var(--line-thickness) solid var(--pal-color-a-750);
+  padding: var(--pal-size-l);
+
+  transition: background-color var(--pal-time-xs) ease-out;
+
+  > header {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--pal-size-l);
+    margin-bottom: var(--pal-size-l);
+
+    > div > small {
+      font-size: var(--pal-size-font-xs);
+    }
+
+    > .cmp-button:disabled {
+      --cmp-button-color: var(--pal-color-b-500);
+    }
+
+    @media (width <= 22rem) {
+      flex-direction: column;
+    }
+  }
+
+  > p {
+    opacity: 0.75;
+  }
+
+  &:hover {
+    background-color: var(--pal-color-a-800);
+  }
+}

@@ -1,0 +1,42 @@
+.cmp-pagination {
+  display: flex;
+  gap: var(--pal-size-xs);
+
+  > a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1;
+    height: var(--ui-height);
+
+    font-size: var(--ui-font-size);
+
+    border-radius: var(--ui-border-radius);
+
+    transition:
+      background-color var(--pal-time-xs) ease-out,
+      scale var(--pal-time-xs) ease;
+
+    &.is-active {
+      background-color: var(--pal-color-a-500);
+      pointer-events: none;
+    }
+
+    &.is-disabled {
+      opacity: 0.2;
+      pointer-events: none;
+    }
+
+    &:last-child > .cmp-icon {
+      rotate: 0.5turn;
+    }
+
+    &:hover {
+      background-color: var(--pal-color-a-750);
+    }
+
+    &:active {
+      scale: 0.95;
+    }
+  }
+}

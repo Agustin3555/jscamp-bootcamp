@@ -1,0 +1,11 @@
+.cmp-footer {
+  border-top: var(--line-thickness) solid var(--pal-color-a-750);
+  padding: var(--pal-size-l);
+  width: 100%;
+
+  text-align: center;
+
+  > small {
+    font-size: var(--pal-size-font-xs);
+  }
+}

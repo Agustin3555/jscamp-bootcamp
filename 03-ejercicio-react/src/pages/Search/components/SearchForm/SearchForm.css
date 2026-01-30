@@ -1,0 +1,11 @@
+.cmp-search-form {
+  > .main {
+    margin-bottom: var(--pal-size-s);
+  }
+
+  > .filters {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(13.5rem, 1fr));
+    gap: var(--pal-size-s);
+  }
+}

@@ -1,0 +1,20 @@
+.cmp-search {
+  display: flex;
+  flex-direction: column;
+
+  > .jobs-search {
+    --cmp-button-color: var(--pal-color-a-750);
+
+    margin-block: calc(var(--pal-size-l) * 3);
+
+    text-align: center;
+
+    > h1 {
+      margin-bottom: var(--pal-size-s);
+    }
+
+    > p {
+      margin-bottom: var(--pal-size-2xl);
+    }
+  }
+}

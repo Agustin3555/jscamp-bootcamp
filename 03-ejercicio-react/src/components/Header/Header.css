@@ -1,0 +1,116 @@
+.cmp-header {
+  position: fixed;
+  z-index: 1;
+
+  border-bottom: var(--line-thickness) solid var(--pal-color-a-750);
+  width: 100%;
+
+  background-color: color-mix(in srgb, transparent 25%, var(--pal-color-a-800));
+  backdrop-filter: blur(16px);
+
+  > .content {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-inline: auto;
+    padding: var(--header-padding);
+    width: 100%;
+    max-width: var(--layout-width);
+
+    > *:not(nav) {
+      z-index: 1;
+    }
+
+    > .cmp-link > h1 {
+      display: flex;
+      align-items: center;
+      gap: var(--pal-size-s);
+
+      font-size: var(--pal-size-font-m);
+
+      > img {
+        width: var(--pal-size-xl);
+
+        color: var(--pal-color-a-500);
+      }
+    }
+
+    > .right {
+      display: flex;
+      align-items: center;
+      gap: var(--pal-size-s);
+
+      > nav {
+        display: flex;
+        gap: var(--pal-size-s);
+
+        > .cmp-link {
+          &:first-child {
+            color: var(--pal-color-a-250);
+          }
+
+          &:last-child {
+            --cmp-link-color: var(--pal-color-a-700);
+          }
+        }
+      }
+
+      > .cmp-button {
+        --cmp-button-color: transparent;
+
+        display: none;
+      }
+    }
+
+    > nav {
+      position: absolute;
+      left: 0;
+
+      display: flex;
+      justify-content: center;
+      gap: var(--pal-size-l);
+      width: 100%;
+
+      > .cmp-link {
+        position: relative;
+
+        transition: color var(--pal-time-s) ease-out;
+
+        &:hover {
+          color: var(--pal-color-a-200);
+        }
+
+        &.is-active {
+          pointer-events: none;
+
+          &::after {
+            position: absolute;
+            bottom: calc(var(--pal-size-xs) * -1);
+            left: 0;
+
+            width: 100%;
+            height: var(--line-thickness);
+
+            content: '';
+
+            background-color: var(--pal-color-a-400);
+          }
+        }
+      }
+    }
+
+    @media (width <= 59rem) {
+      padding-left: var(--pal-size-s);
+
+      > nav {
+        display: none;
+      }
+
+      > .right > .cmp-button {
+        display: flex;
+      }
+    }
+  }
+}

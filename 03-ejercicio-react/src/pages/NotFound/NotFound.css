@@ -1,0 +1,27 @@
+.cmp-not-found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  > h1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: var(--pal-size-m);
+
+    > .cmp-icon {
+      margin-bottom: var(--pal-size-2xl);
+
+      color: var(--pal-color-a-500);
+    }
+
+    > span {
+      font-size: var(--pal-size-xl);
+    }
+  }
+
+  > p {
+    margin-bottom: var(--pal-size-2xl);
+  }
+}

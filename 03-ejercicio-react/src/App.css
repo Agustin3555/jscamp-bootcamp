@@ -1,0 +1,48 @@
+.cmp-app {
+  --layout-width: 75rem;
+  --layout-padding: var(--pal-size-font-l);
+  --layout-max-width: calc(var(--layout-width) + var(--layout-padding) * 2);
+  --header-padding: var(--pal-size-s);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100dvh;
+
+  line-height: 1.4;
+  font-family: var(--pal-font-a);
+  font-weight: 350;
+
+  color: var(--pal-color-a-50);
+  overflow-x: hidden;
+
+  > main {
+    --header-content-height: var(--pal-size-xl);
+
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    margin-top: calc(
+      var(--header-padding) * 2 + var(--header-content-height) +
+        var(--line-thickness)
+    );
+    margin-bottom: var(--pal-size-3xl);
+    padding-inline: var(--layout-padding);
+    width: 100%;
+    max-width: var(--layout-max-width);
+  }
+
+  &:not(:has(main))::before {
+    flex-grow: 1;
+
+    content: '';
+  }
+
+  @media (width <= 59rem) {
+    --header-padding: var(--pal-size-2xs);
+
+    > main {
+      --header-content-height: var(--pal-size-2xl);
+    }
+  }
+}

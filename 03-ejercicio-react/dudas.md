@@ -26,7 +26,7 @@
 
 ## Séptima parte
 
-<!-- Dudas de la séptima parte del ejercicio -->
+El contenido de la página [404](https://github.com/Agustin3555/jscamp-bootcamp/blob/main/03-ejercicio-react/src/pages/NotFound/NotFound.tsx) lo pude crear, pero no sé como controlar que se renderice en [App](https://github.com/Agustin3555/jscamp-bootcamp/blob/main/03-ejercicio-react/src/App.tsx) cuando la ruta no se encuentra. Por lo tanto, lo registré en la ruta `'/*'`.
 
 ## Ejercicio extra
 

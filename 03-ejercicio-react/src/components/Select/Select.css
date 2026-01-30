@@ -1,0 +1,137 @@
+.cmp-select {
+  --picker-padding: var(--pal-size-2xs);
+  --border-radius: var(--pal-size-xs);
+
+  border: none;
+  width: 100%;
+
+  color: var(--pal-color-a-150);
+
+  transition: background-color var(--pal-time-xs) ease-out;
+
+  &,
+  &::picker(select) {
+    border-radius: var(--border-radius);
+    background-color: var(--pal-color-a-750);
+    appearance: base-select;
+  }
+
+  option {
+    --check-size: var(--pal-size-l);
+
+    position: relative;
+
+    display: flex;
+    padding-inline: var(--pal-size-s);
+    height: var(--pal-size-xl);
+
+    font-size: var(--pal-size-font-s);
+
+    border-radius: calc(var(--border-radius) - var(--picker-padding));
+    color: var(--pal-color-a-150);
+
+    overflow: hidden;
+
+    transition: padding-left var(--pal-time-s) ease;
+
+    &::before {
+      position: absolute;
+      left: calc(var(--check-size) * -0.875);
+
+      aspect-ratio: 1;
+      width: 0;
+
+      content: '';
+
+      border-radius: 100%;
+      background-color: var(--pal-color-white);
+
+      transition:
+        width var(--pal-time-s) ease,
+        height var(--pal-time-s) ease;
+    }
+
+    &::checkmark {
+      display: none;
+    }
+
+    &:hover {
+      background-color: var(--pal-color-a-650);
+    }
+
+    &:checked {
+      padding-left: calc(var(--pal-size-s) * 1.75);
+
+      color: var(--pal-color-white);
+      background-color: var(--pal-color-a-550);
+
+      &::before {
+        width: var(--check-size);
+      }
+    }
+  }
+
+  hr {
+    margin-block: var(--pal-size-2xs);
+    height: var(--line-thickness);
+
+    background-color: var(--pal-color-a-650);
+  }
+
+  > button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: var(--pal-size-s);
+    padding-left: var(--pal-size-m);
+    width: 100%;
+    height: var(--pal-size-2xl);
+
+    > .cmp-icon {
+      rotate: -0.25turn;
+
+      transition: rotate var(--pal-time-s) ease;
+    }
+  }
+
+  &::picker-icon {
+    display: none;
+  }
+
+  &::picker(select) {
+    margin-top: var(--pal-size-m);
+    border: var(--line-thickness) solid var(--pal-color-a-650);
+    padding: var(--picker-padding);
+
+    box-shadow: var(--pal-shadow-1);
+    scale: 0.95;
+    opacity: 0;
+
+    transition:
+      display var(--pal-time-s) ease allow-discrete,
+      overlay var(--pal-time-s) ease allow-discrete,
+      margin-top var(--pal-time-s) ease,
+      scale var(--pal-time-s) ease,
+      opacity var(--pal-time-s) ease;
+  }
+
+  &::picker(select):popover-open {
+    margin-top: var(--pal-size-2xs);
+    scale: initial;
+    opacity: initial;
+
+    @starting-style {
+      margin-top: var(--pal-size-m);
+      scale: 0.95;
+      opacity: 0;
+    }
+  }
+
+  &:hover {
+    background-color: color-mix(in srgb, #fff 5%, var(--pal-color-a-750));
+  }
+
+  &:open > button > .cmp-icon {
+    rotate: 0.25turn;
+  }
+}

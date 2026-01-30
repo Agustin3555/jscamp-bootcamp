@@ -1,0 +1,42 @@
+.cmp-results {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--pal-size-2xl);
+
+  > h2 {
+    align-self: flex-start;
+  }
+
+  > .jobs-listings,
+  > small {
+    border: var(--line-thickness) solid var(--pal-color-a-750);
+
+    border-radius: var(--pal-size-xs);
+  }
+
+  > .jobs-listings {
+    display: flex;
+    flex-direction: column;
+
+    overflow: hidden;
+
+    > li:last-child > .cmp-job-card > article {
+      border-bottom: none;
+    }
+  }
+
+  > small {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--pal-size-s);
+    padding: var(--pal-size-2xl);
+    width: 100%;
+
+    font-size: inherit;
+    text-wrap: balance;
+
+    color: var(--pal-color-a-200);
+  }
+}

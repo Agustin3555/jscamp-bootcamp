@@ -1,0 +1,48 @@
+:root {
+  --cmp-button-color: var(--pal-color-a-500);
+}
+
+.cmp-button {
+  border: none;
+  padding-inline: var(--ui-padding-inline);
+  height: var(--ui-height);
+
+  font-size: var(--ui-font-size);
+  font-weight: 500;
+  white-space: nowrap;
+
+  border-radius: var(--ui-border-radius);
+  background-color: var(--cmp-button-color);
+  cursor: pointer;
+
+  transition:
+    background-color var(--pal-time-xs) ease-out,
+    opacity var(--pal-time-xs) ease-out,
+    scale var(--pal-time-xs) ease;
+
+  &:hover {
+    background-color: color-mix(in srgb, #fff 5%, var(--cmp-button-color));
+  }
+
+  &.square {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    aspect-ratio: 1;
+  }
+
+  &:active {
+    scale: 0.95;
+  }
+
+  &:disabled {
+    background-color: color-mix(
+      in srgb,
+      transparent 50%,
+      var(--cmp-button-color)
+    );
+    opacity: 0.75;
+    pointer-events: none;
+  }
+}
