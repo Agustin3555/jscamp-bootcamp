@@ -14,7 +14,10 @@ const Home = () => {
       const formData = new FormData(e.currentTarget)
       const text = formData.get('search') as undefined | string
 
-      navigateTo(`/search${text ? `?text=${text}` : ''}`)
+      /* Genial como lo hiciste! Con esta alternativa siento que queda más claro :) */
+      const navigateString = text ? `?text=${encodeURIComponent(text)}` : ''
+
+      navigateTo(`/search${navigateString}`)
     },
     [navigateTo]
   )

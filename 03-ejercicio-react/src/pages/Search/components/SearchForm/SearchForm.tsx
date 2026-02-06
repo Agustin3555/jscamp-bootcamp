@@ -5,7 +5,6 @@ import {
   useState,
   type ChangeEventHandler,
   type Dispatch,
-  type FormEventHandler,
   type SetStateAction,
 } from 'react'
 import { Icon } from '@/components/Icon/Icon'
@@ -25,6 +24,11 @@ interface SearchFormProps {
   setCurrentPage: Dispatch<SetStateAction<number>>
 }
 
+/* 
+Siempre que podamos es buena práctica evitar pasar `setStates` como props
+En su lugar, es mejor pasar un callback que maneje la lógica de los estados
+Por ejemplo: handleReset, para hacer lo que necesitemos cuando se llame
+*/
 export const SearchForm = ({
   text,
   setText,
@@ -39,11 +43,6 @@ export const SearchForm = ({
 }: SearchFormProps) => {
   const [textValue, setTextValue] = useState(text)
   const timeoutId = useRef<number>(null)
-
-  const handleSubmit = useCallback<FormEventHandler<HTMLFormElement>>(
-    e => e.preventDefault(),
-    []
-  )
 
   const handleReset = useCallback(() => {
     setTextValue('')
@@ -141,7 +140,8 @@ export const SearchForm = ({
     <form
       className="cmp-search-form search-form-main"
       role="search"
-      onSubmit={handleSubmit}
+      /* Podemos hacerlo en linea. La función `handleSubmit` no hace nada, por lo que podemos evitar ruido en el código */
+      onSubmit={e => e.preventDefault()}
       onReset={handleReset}
     >
       <div className="main">

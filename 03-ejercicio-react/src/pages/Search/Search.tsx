@@ -3,24 +3,37 @@ import { useState } from 'react'
 import { SearchForm } from './components/SearchForm/SearchForm'
 import { Result } from './components/Results/Results'
 
-const initFilter = (name: string) => () => {
+const getInitialParams = () => {
   const params = new URLSearchParams(window.location.search)
-  return params.get(name) ?? undefined
+
+  return {
+    text: params.get('text') ?? undefined,
+    technology: params.get('technology') ?? undefined,
+    type: params.get('type') ?? undefined,
+    level: params.get('level') ?? undefined,
+    page: (() => {
+      const page = Number(params.get('page'))
+      return Number.isNaN(page) || page < 1 ? 1 : page
+    })(),
+  }
 }
 
 const Search = () => {
-  const [text, setText] = useState(initFilter('text'))
-  const [technology, setTechnology] = useState(initFilter('technology'))
-  const [type, setType] = useState(initFilter('type'))
-  const [level, setLevel] = useState(initFilter('level'))
+  /* 
+   * Optimización de performance:
+   * En lugar de llamar getInitialParams() dentro de cada useState (lo que crearía
+   * URLSearchParams 5 veces), lo llamamos una sola vez y reutilizamos el resultado.
+   * 
+   * Nota: getInitialParams() se ejecuta en cada render, pero React solo usa el valor
+   * inicial en el primer render para useState. Los valores en re-renders son ignorados.
+   */
+  const initialParams = getInitialParams()
 
-  const [currentPage, setCurrentPage] = useState(() => {
-    const params = new URLSearchParams(window.location.search)
-    const page = Number(params.get('page'))
-
-    if (Number.isNaN(page) || page < 1) return 1
-    return page
-  })
+  const [text, setText] = useState(initialParams.text)
+  const [technology, setTechnology] = useState(initialParams.technology)
+  const [type, setType] = useState(initialParams.type)
+  const [level, setLevel] = useState(initialParams.level)
+  const [currentPage, setCurrentPage] = useState(initialParams.page)
 
   return (
     <main className="cmp-search">
