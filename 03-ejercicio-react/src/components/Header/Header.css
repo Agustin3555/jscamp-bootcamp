@@ -112,5 +112,11 @@
         display: flex;
       }
     }
+
+    @media (width <= 32rem) {
+      > .right > nav {
+        display: none;
+      }
+    }
   }
 }
