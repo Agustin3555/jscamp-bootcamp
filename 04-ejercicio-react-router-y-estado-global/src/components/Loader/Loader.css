@@ -1,0 +1,71 @@
+.cmp-loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1;
+  width: var(--size);
+
+  &::before {
+    --point-size: calc(var(--size) / 4);
+    --gap: calc(var(--point-size) * 2);
+    --jump: calc(var(--point-size) * 1.5);
+    --start: calc(var(--gap) * 1.5);
+
+    position: absolute;
+
+    aspect-ratio: 1;
+    width: var(--point-size);
+
+    content: '';
+
+    border-radius: 50%;
+
+    animation: wave 1s linear infinite alternate;
+  }
+
+  &.s {
+    --size: var(--pal-size-font-s);
+  }
+
+  &.m {
+    --size: var(--pal-size-font-m);
+  }
+
+  &.l {
+    --size: var(--pal-size-font-xl);
+  }
+}
+
+@keyframes wave {
+  0% {
+    box-shadow:
+      calc(var(--start) * -1) calc(var(--jump) * -1),
+      calc(var(--gap) * -0.5) 0,
+      calc(var(--gap) * 0.5) 0,
+      var(--start) 0;
+  }
+
+  33% {
+    box-shadow:
+      calc(var(--start) * -1) 0,
+      calc(var(--gap) * -0.5) calc(var(--jump) * -1),
+      calc(var(--gap) * 0.5) 0,
+      var(--start) 0;
+  }
+
+  66% {
+    box-shadow:
+      calc(var(--start) * -1) 0,
+      calc(var(--gap) * -0.5) 0,
+      calc(var(--gap) * 0.5) calc(var(--jump) * -1),
+      var(--start) 0;
+  }
+
+  100% {
+    box-shadow:
+      calc(var(--start) * -1) 0,
+      calc(var(--gap) * -0.5) 0,
+      calc(var(--gap) * 0.5) 0,
+      var(--start) calc(var(--jump) * -1);
+  }
+}

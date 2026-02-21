@@ -1,0 +1,36 @@
+.cmp-section > div {
+  padding-block: var(--pal-size-xl);
+
+  opacity: 0.85;
+
+  * {
+    margin-bottom: var(--pal-size-xl);
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  ul {
+    flex-direction: column;
+
+    li {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--pal-size-s);
+      margin-bottom: var(--pal-size-m);
+
+      &::before {
+        flex-shrink: 0;
+
+        aspect-ratio: 1;
+        width: var(--pal-size-l);
+
+        content: '';
+
+        background-color: var(--pal-color-a-400);
+        mask: url('/icons/circle-check.svg') no-repeat center / contain;
+      }
+    }
+  }
+}

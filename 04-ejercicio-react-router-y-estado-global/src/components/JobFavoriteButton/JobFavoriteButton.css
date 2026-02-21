@@ -1,0 +1,9 @@
+.cmp-job-favorite-button {
+  --cmp-button-color: var(--pal-color-a-750);
+
+  color: var(--pal-color-a-500);
+
+  &.is-active {
+    color: var(--pal-color-white);
+  }
+}

@@ -1,0 +1,59 @@
+.ui-l {
+  --ui-gap: var(--pal-size-s);
+  --ui-padding-inline: var(--pal-size-l);
+  --ui-height: var(--pal-size-2xl);
+  --ui-font-size: var(--pal-size-font-s);
+  --ui-icon-size: var(--pal-size-m);
+  --ui-border-radius: var(--pal-size-xs);
+}
+
+.ui-m {
+  --ui-gap: var(--pal-size-xs);
+  --ui-padding-inline: var(--pal-size-m);
+  --ui-height: var(--pal-size-xl);
+  --ui-font-size: var(--pal-size-font-xs);
+  --ui-icon-size: var(--pal-size-s);
+  --ui-border-radius: var(--pal-size-xs);
+}
+
+.ui-s {
+  --ui-gap: var(--pal-size-2xs);
+  --ui-padding-inline: var(--pal-size-xs);
+  --ui-height: var(--pal-size-l);
+  --ui-font-size: var(--pal-size-font-2xs);
+  --ui-icon-size: var(--pal-size-s);
+  --ui-border-radius: var(--pal-size-2xs);
+}
+
+.text-muted {
+  opacity: 0.625;
+}
+
+.search-form-main {
+  width: 100%;
+
+  > .main {
+    display: flex;
+    align-items: center;
+    gap: var(--pal-size-m);
+    border: var(--line-thickness) solid var(--pal-color-a-750);
+    padding: var(--pal-size-2xs);
+    padding-left: var(--pal-size-m);
+    width: 100%;
+
+    border-radius: var(--pal-size-s);
+    background-color: var(--pal-color-a-800);
+    box-shadow: var(--pal-shadow-1);
+    backdrop-filter: blur(1rem);
+
+    > label {
+      flex-grow: 1;
+
+      display: flex;
+
+      > input {
+        width: 100%;
+      }
+    }
+  }
+}

@@ -1,0 +1,55 @@
+@keyframes pageEnter {
+  to {
+    opacity: initial;
+  }
+}
+
+.cmp-app {
+  --layout-width: 75rem;
+  --layout-padding: var(--pal-size-font-l);
+  --layout-max-width: calc(var(--layout-width) + var(--layout-padding) * 2);
+  --header-padding: var(--pal-size-s);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100dvh;
+
+  line-height: 1.5;
+  font-family: var(--pal-font-a);
+  font-weight: 350;
+
+  color: var(--pal-color-a-50);
+  overflow-x: hidden;
+
+  > :is(.cmp-loader, main) {
+    flex-grow: 1;
+
+    opacity: 0;
+
+    animation: pageEnter var(--pal-time-m) ease forwards;
+  }
+
+  > main {
+    --header-content-height: var(--pal-size-xl);
+
+    display: flex;
+    flex-direction: column;
+    margin-top: calc(
+      var(--header-padding) * 2 + var(--header-content-height) +
+        var(--line-thickness)
+    );
+    margin-bottom: var(--pal-size-3xl);
+    padding-inline: var(--layout-padding);
+    width: 100%;
+    max-width: var(--layout-max-width);
+  }
+
+  @media (width <= 59rem) {
+    --header-padding: var(--pal-size-2xs);
+
+    > main {
+      --header-content-height: var(--pal-size-2xl);
+    }
+  }
+}

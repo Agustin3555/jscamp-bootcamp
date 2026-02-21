@@ -1,0 +1,3 @@
+.cmp-job-apply-button:disabled {
+  --cmp-button-color: var(--pal-color-b-500);
+}

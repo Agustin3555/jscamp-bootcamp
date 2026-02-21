@@ -1,0 +1,26 @@
+.cmp-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  > svg {
+    width: var(--size);
+    height: var(--size);
+  }
+
+  &.s {
+    --size: var(--pal-size-font-m);
+  }
+
+  &.m {
+    --size: var(--pal-size-font-l);
+  }
+
+  &.l {
+    --size: var(--pal-size-font-xl);
+  }
+
+  &.xl {
+    --size: var(--pal-size-3xl);
+  }
+}
