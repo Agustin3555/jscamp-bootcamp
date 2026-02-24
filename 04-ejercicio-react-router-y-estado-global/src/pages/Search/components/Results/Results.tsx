@@ -3,8 +3,6 @@ import {
   useCallback,
   useEffect,
   useMemo,
-  type Dispatch,
-  type SetStateAction,
 } from 'react'
 import { useAsyncAction } from '@/hooks/useAsyncAction.hook'
 import { Icon } from '@/components/Icon/Icon'
@@ -12,16 +10,12 @@ import { Loader } from '@/components/Loader/Loader'
 import { JobCard } from './components/JobCard/JobCard'
 import { Pagination } from './components/Pagination/Pagination'
 import { Jobs } from '@/services/jobs.service'
+import type { FilterJobsParams } from '../../types'
 
 const RESULTS_PER_PAGE = 10
 
-interface ResultProps {
-  text?: string
-  technology?: string
-  type?: string
-  level?: string
-  currentPage: number
-  setCurrentPage: Dispatch<SetStateAction<number>>
+interface ResultProps extends FilterJobsParams {
+  onPageChange: (page: FilterJobsParams['page']) => void
 }
 
 export const Result = ({
@@ -29,8 +23,8 @@ export const Result = ({
   technology,
   type,
   level,
-  currentPage,
-  setCurrentPage,
+  page: currentPage = 1,
+  onPageChange,
 }: ResultProps) => {
   const search = useCallback(async () => {
     const limit = RESULTS_PER_PAGE
@@ -50,11 +44,10 @@ export const Result = ({
     [response],
   )
 
-  const title = `${
-    response
-      ? `Resultados ${response.total} | Página ${currentPage}`
-      : 'Cargando...'
-  } | DevJobs`
+  const title = `${response
+    ? `Resultados ${response.total} | Página ${currentPage}`
+    : 'Cargando...'
+    } | DevJobs`
 
   return (
     <section className="cmp-results">
@@ -71,7 +64,7 @@ export const Result = ({
               </li>
             ))}
           </ul>
-          <Pagination {...{ totalPages, currentPage, setCurrentPage }} />
+          <Pagination {...{ totalPages, currentPage, onPageChange }} />
         </>
       ) : (
         <small>
