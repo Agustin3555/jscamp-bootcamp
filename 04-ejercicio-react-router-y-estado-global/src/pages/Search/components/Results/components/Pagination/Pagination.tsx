@@ -1,23 +1,22 @@
 import './Pagination.css'
 import {
   useCallback,
-  type Dispatch,
   type MouseEventHandler,
-  type SetStateAction,
 } from 'react'
 import { Icon } from '@/components/Icon/Icon'
 import { classList } from '@/helpers/classList.helper'
+import type { FilterJobsParams } from '@/pages/Search/types'
 
 interface PaginationProps {
   totalPages: number
   currentPage?: number
-  setCurrentPage: Dispatch<SetStateAction<number>>
+  onPageChange: (page: FilterJobsParams['page']) => void
 }
 
 export const Pagination = ({
   totalPages,
   currentPage = 1,
-  setCurrentPage,
+  onPageChange,
 }: PaginationProps) => {
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1)
 
@@ -32,19 +31,19 @@ export const Pagination = ({
 
   const handleClickPrev: MouseEventHandler<HTMLAnchorElement> = e => {
     e.preventDefault()
-    if (isFirstPage === false) setCurrentPage(prev => prev - 1)
+    if (isFirstPage === false) onPageChange(currentPage - 1)
   }
 
   const handleClickNext: MouseEventHandler<HTMLAnchorElement> = e => {
     e.preventDefault()
-    if (isLastPage === false) setCurrentPage(prev => prev + 1)
+    if (isLastPage === false) onPageChange(currentPage + 1)
   }
 
   const handleChangePage: (
-    page: number
+    page: FilterJobsParams['page']
   ) => MouseEventHandler<HTMLAnchorElement> = page => e => {
     e.preventDefault()
-    if (page !== currentPage) setCurrentPage(page)
+    if (page !== currentPage) onPageChange(page)
   }
 
   return (
