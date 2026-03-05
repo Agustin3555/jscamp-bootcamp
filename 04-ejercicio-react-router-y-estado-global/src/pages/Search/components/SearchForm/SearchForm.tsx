@@ -5,54 +5,42 @@ import {
   useRef,
   useState,
   type ChangeEventHandler,
-  type Dispatch,
-  type SetStateAction,
 } from 'react'
 import { Icon } from '@/components/Icon/Icon'
 import { Button } from '@/components/Button/Button'
 import { Select, type SelectProps } from '@/components/Select/Select'
-import type { SetURLSearchParams } from 'react-router'
+import type { FilterJobsParams } from '../../types'
+import { useSearchParams } from 'react-router'
 
-interface SearchFormProps {
-  text: string | undefined
-  setText: Dispatch<SetStateAction<string | undefined>>
-  technology: string | undefined
-  setTechnology: Dispatch<SetStateAction<string | undefined>>
-  type: string | undefined
-  setType: Dispatch<SetStateAction<string | undefined>>
-  level: string | undefined
-  setLevel: Dispatch<SetStateAction<string | undefined>>
-
-  setCurrentPage: Dispatch<SetStateAction<number>>
-  currentPage: number
-  setSearchParams: SetURLSearchParams
+/* Podemos aprovechar que tenemos el contrato de tipos de los filtros para extenderlo y agregar los setters. De esta manera queda más simple y mantenible */
+interface SearchFormProps extends FilterJobsParams {
+  onFilterChange: (name: keyof FilterJobsParams, value: FilterJobsParams[keyof FilterJobsParams]) => void
 }
 
+/* Hicimos cambios para generar un handler que se encargue de modificar los valores de los filtros. La lógica del handler está en el componente padre, y este componente es quien lo usa, sin saber qué hace internamente la función */
+/* Con este cambio, el componente SearchForm se vuelve más simple y mantenible */
 export const SearchForm = ({
   text,
-  setText,
   technology,
-  setTechnology,
   type,
-  setType,
   level,
-  setLevel,
-
-  setCurrentPage,
-  currentPage,
-  setSearchParams,
+  page: currentPage,
+  onFilterChange,
 }: SearchFormProps) => {
+  /* podemos usar otra vez el hook de useSearchParams aquí y evitar pasar el setter como prop. Con esto nos ahorramos un setter adicional y evitamos el tener que importar el type de la librería de react-router */
+  const [, setSearchParams] = useSearchParams()
   const [textValue, setTextValue] = useState(text)
   const timeoutId = useRef<number>(null)
 
   const handleReset = useCallback(() => {
     setTextValue('')
 
-    setText('')
-    setTechnology('')
-    setType('')
-    setLevel('')
-  }, [setText, setTechnology, setType, setLevel])
+    onFilterChange('text', undefined)
+    onFilterChange('technology', undefined)
+    onFilterChange('type', undefined)
+    onFilterChange('level', undefined)
+    onFilterChange('page', 1)
+  }, [onFilterChange])
 
   const handleChangeText = useCallback<ChangeEventHandler<HTMLInputElement>>(
     e => {
@@ -62,23 +50,23 @@ export const SearchForm = ({
       if (timeoutId.current) clearTimeout(timeoutId.current)
 
       timeoutId.current = setTimeout(() => {
-        setText(text)
-        setCurrentPage(1)
+        onFilterChange('text', text)
+        onFilterChange('page', 1)
       }, 500)
     },
-    [setText, setCurrentPage],
+    [onFilterChange],
   )
 
   const handleChangeSelect = useCallback<
     (
-      setter: Dispatch<SetStateAction<string | undefined>>,
+      name: keyof FilterJobsParams
     ) => ChangeEventHandler<HTMLSelectElement>
   >(
-    setter => e => {
-      setter(e.target.value)
-      setCurrentPage(1)
+    name => e => {
+      onFilterChange(name, e.target.value)
+      onFilterChange('page', 1)
     },
-    [setCurrentPage],
+    [onFilterChange],
   )
 
   useEffect(() => {
@@ -93,7 +81,7 @@ export const SearchForm = ({
 
       return params
     })
-  }, [text, technology, type, level, currentPage])
+  }, [text, technology, type, level, currentPage, setSearchParams])
 
   const selects = [
     {
@@ -118,7 +106,7 @@ export const SearchForm = ({
           { value: 'python', title: 'Python' },
         ],
       ],
-      onChange: handleChangeSelect(setTechnology),
+      onChange: handleChangeSelect('technology'),
     },
     {
       name: 'type-filter',
@@ -133,7 +121,7 @@ export const SearchForm = ({
           { value: 'barcelona', title: 'Barcelona' },
         ],
       ],
-      onChange: handleChangeSelect(setType),
+      onChange: handleChangeSelect('type'),
     },
     {
       name: 'level-filter',
@@ -147,7 +135,7 @@ export const SearchForm = ({
           { value: 'lead', title: 'Lead' },
         ],
       ],
-      onChange: handleChangeSelect(setLevel),
+      onChange: handleChangeSelect('level'),
     },
   ] satisfies SelectProps[]
 
