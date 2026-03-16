@@ -1,19 +1,6 @@
-import { createServer } from 'node:http'
+export type User = (typeof USERS)[number]
 
-process.loadEnvFile()
-
-const port = process.env.PORT || 3000
-
-const server = createServer((req, res) => {
-  // TODO: Aquí irá la lógica del servidor
-})
-
-server.listen(port, () => {
-  const address = server.address()
-  console.log(`Servidor escuchando en http://localhost:${address.port}`)
-})
-
-const users = [
+export const USERS = [
   {
     id: 'a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d',
     name: 'Miguel',
