@@ -1,13 +1,20 @@
 /* En este ejercicio deberás tipar las funciones con los tipos ya creados, y usar `Partial` y `Readonly` en cada caso. */
 
-export function updateJob(job: any, updates: Partial<any>): any {
+import type { Job } from './objects'
+
+export function updateJob(job: Job, updates: Partial<Job>): Job {
   return { ...job, ...updates }
 }
 
-export type JobSummary = any
+export type JobSummary = {
+  id: string
+  title: string
+  company: string
+  location: string
+}
 
-export function getJobSummaries(jobs: any[]): JobSummary[] {
-  return jobs.map((job) => ({
+export function getJobSummaries(jobs: Job[]): JobSummary[] {
+  return jobs.map(job => ({
     id: job.id,
     title: job.title,
     company: job.company,
@@ -15,9 +22,8 @@ export function getJobSummaries(jobs: any[]): JobSummary[] {
   }))
 }
 
-export type ReadonlyJob = any
+export type ReadonlyJob = Readonly<Job>
 
 export function displayJob(job: ReadonlyJob): void {
   console.log(`${job.title} - ${job.company}`)
-  job.title = 'Nuevo título'
 }

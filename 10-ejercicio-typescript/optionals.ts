@@ -6,38 +6,41 @@ import {
   filterByTechnology,
   filterByMinSalary,
 } from './functions.ts'
+import type { Job } from './objects.ts'
+import type { ExperienceLevel, Technology } from './types.ts'
 
 // Función de búsqueda avanzada con opcionales
-export function advancedSearch(jobs: any[], options: any): any[] {
+export function advancedSearch(
+  jobs: Job[],
+  {
+    text,
+    level,
+    technology,
+    minSalary,
+    workMode,
+  }: {
+    text?: string
+    level?: ExperienceLevel
+    technology?: Technology
+    minSalary?: number
+    workMode?: string
+  },
+): Job[] {
   let results = jobs
 
-  if (options.text) {
-    results = searchJobs(results, options.text)
-  }
-
-  if (options.level) {
-    results = filterByExperience(results, options.level)
-  }
-
-  if (options.technology) {
-    results = filterByTechnology(results, options.technology)
-  }
-
-  if (options.minSalary) {
-    results = filterByMinSalary(results, options.minSalary)
-  }
-
-  if (options.workMode) {
-    results = results.filter((job) => job.workMode === options.workMode)
-  }
+  if (text) results = searchJobs(results, text)
+  if (level) results = filterByExperience(results, level)
+  if (technology) results = filterByTechnology(results, technology)
+  if (minSalary) results = filterByMinSalary(results, minSalary)
+  if (workMode) results = results.filter(j => j.workMode === workMode)
 
   return results
 }
 
 // Función con valores por defecto
-export function getRecentJobs(jobs: any[], days: any): any[] {
+export function getRecentJobs(jobs: Job[], days = 30): Job[] {
   const cutoffDate = new Date()
   cutoffDate.setDate(cutoffDate.getDate() - days)
 
-  return jobs.filter((job) => job.postedDate >= cutoffDate)
+  return jobs.filter(job => job.postedDate >= cutoffDate)
 }
