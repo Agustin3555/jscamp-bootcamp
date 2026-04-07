@@ -23,6 +23,7 @@ export const Select = ({
   <label htmlFor={id}>
     <select
       className="cmp-select"
+      data-testid={name}
       aria-label={title}
       {...{ id, name, value, onChange }}
     >

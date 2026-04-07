@@ -6,7 +6,7 @@ import { JobFavoriteButton } from '@/components/JobFavoriteButton/JobFavoriteBut
 
 type JobCardProps = Pick<
   Job,
-  'id' | 'titulo' | 'empresa' | 'ubicacion' | 'descripcion'
+  'id' | 'titulo' | 'empresa' | 'ubicacion' | 'descripcion' | 'data'
 >
 
 export const JobCard = ({
@@ -15,9 +15,10 @@ export const JobCard = ({
   empresa,
   ubicacion,
   descripcion,
+  data,
 }: JobCardProps) => (
   <Link handleClass="cmp-job-card" href={`/jobs/${id}`}>
-    <article>
+    <article data-type={data.modalidad} data-level={data.nivel}>
       <header>
         <div>
           <h3>{titulo}</h3>
