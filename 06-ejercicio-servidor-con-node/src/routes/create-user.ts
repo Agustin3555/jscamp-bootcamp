@@ -8,10 +8,12 @@ export const createUser: Route = {
   route: 'users',
 
   handler: async ({ req, send }) => {
-    let body: Partial<User> | undefined
+    // Muy bien usando Partial.
+    // Lo haría con un Omit<User, 'id'> para evitar que se pueda enviar el `id`, y con un Partial<Omit<User, 'id'>> para que sean opcionales los campos que quedan.
+    let body: Partial<Omit<User, 'id'>> | undefined
 
     try {
-      body = (await json(req)) as Partial<User>
+      body = (await json(req)) as Partial<Omit<User, 'id'>>
     } catch {
       return send({
         status: 400,
