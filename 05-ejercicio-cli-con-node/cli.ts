@@ -14,10 +14,19 @@ const hasReadPermission = process.permission?.has('fs.read', dir)
 
 if (!hasReadPermission) {
   console.error('No tienes permiso para leer el directorio 😒')
+  // Dejamos un ejemplo al usuario de cómo hacerlo
+  console.error(`Intenta con: node --permission --allow-fs-read=${dir} cli.js ${dir}`)
   process.exit(1)
 }
 
-const files = await readdir(dir)
+// Pongamos esto en un try/catch, por si el usuario ingresa un directorio que no existe 
+let files
+try {
+  files = await readdir(dir)
+} catch (error) {
+  console.error('No se pudo leer el directorio 😒')
+  process.exit(1)
+}
 
 const formatBytes = (size: number) =>
   size < 1024 ? `${size} B` : `${(size / 1024).toFixed(2)} KB`
