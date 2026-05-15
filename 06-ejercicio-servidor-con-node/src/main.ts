@@ -18,6 +18,7 @@ const server = createServer(async (req, res) => {
     r => r.method === method && `/${r.route}` === pathname,
   )
 
+  // muy bien diseñado! Me gusta como manejas el flujo de control
   if (route) return await route.handler({ req, res, send })
 
   return send({
