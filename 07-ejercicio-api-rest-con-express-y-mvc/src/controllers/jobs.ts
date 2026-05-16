@@ -32,8 +32,10 @@ export class JobController {
   }
 
   static getId: RequestHandler = (req, res) => {
-    const { job } = req
-    return res.json(job)
+    // Obtenemos el job a partir del modelo
+    const { id } = req.params
+    const jobById = JobModel.getById(id as string)
+    return res.json(jobById)
   }
 
   static create: RequestHandler = (req, res) => {

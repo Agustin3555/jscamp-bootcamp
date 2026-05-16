@@ -78,11 +78,28 @@ export class JobModel {
   }
 
   static updateById = (id: Job['id'], newJob: Job) => {
-    this.deleteById(id)
-    jobs.push(newJob)
+    // Está bien, aunque podemos hacerlo de otra manera
+    const index = jobs.findIndex((job) => job.id === id);
+    if (index === -1) return null;
+    jobs[index] = Object.assign(jobs[index] as Job, {
+      titulo: newJob.titulo,
+      empresa: newJob.empresa,
+      ubicacion: newJob.ubicacion,
+      descripcion: newJob.descripcion,
+      data: newJob.data,
+      content: newJob.content,
+    });
+    return jobs[index];
+
+    // this.deleteById(id)
+    // jobs.push(newJob)
   }
 
   static deleteById = (id: Job['id']) => {
-    jobs = jobs.filter(j => j.id !== id)
+    // Con un filter no alcanza, hay que eliminarlo de la lista
+    const index = jobs.findIndex((job) => job.id === id);
+    if (index === -1) return null;
+    const deletedJob = jobs.splice(index, 1);
+    return deletedJob[0];
   }
 }
