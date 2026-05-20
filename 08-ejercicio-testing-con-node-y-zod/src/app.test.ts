@@ -36,35 +36,51 @@ describe('GET /jobs', () => {
   })
 
   test('Debe filtrar trabajos por tecnología', async () => {
-    const response = await fetch(`${BASE_URL}?technology=react`)
+    // Si usamos una constante repetida, mejor usar una variable local
+    const technology = 'react'
+    const response = await fetch(`${BASE_URL}?technology=${technology}`)
     const json = await response.json()
 
     assert.strictEqual(response.status, 200)
     assert.ok(Array.isArray(json.data))
 
-    for (const job of json.data) {
+    // Podemos usar en `every` y evitar un bucle manual
+    assert.ok(json.data.every((job: any) => job.data.technology.includes(technology)))
+    /* for (const job of json.data) {
       assert.ok(
-        job.data.technology.includes('react'),
-        `El job "${job.titulo}" no incluye la tecnología "react"`,
+        job.data.technology.includes(technology),
+        `El job "${job.titulo}" no incluye la tecnología "${technology}"`,
       )
-    }
+    } */
   })
 
   test('Debe respetar el límite de resultados', async () => {
-    const response = await fetch(`${BASE_URL}?limit=2`)
+    // Pasamos el límite como variable
+    const limit = 2
+    const response = await fetch(`${BASE_URL}?limit=${limit}`)
     const json = await response.json()
 
     assert.strictEqual(response.status, 200)
-    assert.strictEqual(json.limit, 2)
-    assert.strictEqual(json.data.length, 2)
+    // Muy bien evaluando también la propiedad `limit`
+    assert.strictEqual(json.limit, limit)
+    assert.strictEqual(json.data.length, limit)
   })
 
   test('Debe aplicar offset correctamente', async () => {
-    const response = await fetch(`${BASE_URL}?offset=1`)
+    const offset = 1
+    const response = await fetch(`${BASE_URL}?offset=${offset}`)
     const json = await response.json()
 
     assert.strictEqual(response.status, 200)
     assert.strictEqual(json.data[0].id, 'd35b2c89-5d60-4f26-b19a-6cfb2f1a0f57')
+
+    // En vez de usar el ID manual, podemos obtenerlo de manera dinámica
+    const allJobsResponse = await fetch(BASE_URL)
+    const allJobs = await allJobsResponse.json()
+
+    // Obtenemos el job de la posición 1 (correspondiente al offset 1)
+    const firstJobIdBeforeOffset = allJobs.data[offset].id
+    assert.strictEqual(json.data[0].id, firstJobIdBeforeOffset)
   })
 })
 
@@ -310,6 +326,12 @@ describe('DELETE /jobs/:id', () => {
   const VALID_ID = 'f62d8a34-923a-4ac2-9b0b-14e0ac2f5405'
 
   test('Debe recibir 204 y eliminar el trabajo', async () => {
+
+    // Debemos verificar antes que existía
+     // Verificar que fue eliminado
+    const getResponseBeforeDelete = await fetch(`${BASE_URL}/${VALID_ID}`)
+    assert.strictEqual(getResponseBeforeDelete.status, 200)
+
     const deleteResponse = await fetch(`${BASE_URL}/${VALID_ID}`, {
       method: 'DELETE',
     })
