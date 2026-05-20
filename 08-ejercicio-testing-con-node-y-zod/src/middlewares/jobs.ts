@@ -1,6 +1,6 @@
 import type { Request, Response, NextFunction, RequestHandler } from 'express'
-import { JobModel } from '../models/jobs.js'
-import { validateJob, validatePartialJob } from '../schemas/jobs.js'
+import { JobModel } from '../models/jobs.ts'
+import { validateJob, validatePartialJob } from '../schemas/jobs.ts'
 
 declare global {
   namespace Express {

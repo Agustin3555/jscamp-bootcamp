@@ -1,5 +1,5 @@
-import app from './app.js'
-import { DEFAULTS } from './config.js'
+import app from './app.ts'
+import { DEFAULTS } from './config.ts'
 
 const { PORT } = DEFAULTS
 

@@ -1,6 +1,6 @@
 import { Router } from 'express'
-import { JobController } from '../controllers/jobs.js'
-import { JobMiddlewares } from '../middlewares/jobs.js'
+import { JobController } from '../controllers/jobs.ts'
+import { JobMiddlewares } from '../middlewares/jobs.ts'
 
 export const jobsRouter: Router = Router()
 

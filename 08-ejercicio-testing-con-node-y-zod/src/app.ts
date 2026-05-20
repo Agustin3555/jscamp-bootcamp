@@ -1,6 +1,6 @@
 import express, { type Application } from 'express'
-import { jobsRouter } from './routes/jobs.js'
-import { corsMiddleware } from './middlewares/cors.js'
+import { jobsRouter } from './routes/jobs.ts'
+import { corsMiddleware } from './middlewares/cors.ts'
 
 const app: Application = express()
 

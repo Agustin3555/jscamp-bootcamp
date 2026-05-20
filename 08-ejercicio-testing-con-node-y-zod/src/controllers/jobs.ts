@@ -1,6 +1,6 @@
 import type { RequestHandler } from 'express'
-import { JobModel } from '../models/jobs.js'
-import { DEFAULTS } from '../config.js'
+import { JobModel } from '../models/jobs.ts'
+import { DEFAULTS } from '../config.ts'
 
 export class JobController {
   static getAll: RequestHandler = async (req, res) => {

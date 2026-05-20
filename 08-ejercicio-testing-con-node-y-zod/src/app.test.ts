@@ -1,6 +1,6 @@
 import { test, before, after, describe } from 'node:test'
 import assert from 'node:assert'
-import app from './app.js'
+import app from './app.ts'
 import { Server } from 'http'
 
 let server: Server
