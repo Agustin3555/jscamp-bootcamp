@@ -13,7 +13,9 @@ test('Test de búsqueda de empleos', async ({ page }) => {
   const firstJob = jobCards.first()
   await expect(firstJob).toBeVisible()
 
-  const firstJobTitle = firstJob.locator('h3')
+  // const firstJobTitle = firstJob.locator('h3')
+  // Podemos hacer un `getByRole`
+  const firstJobTitle = firstJob.getByRole('heading', { level: 3 }) // <- El level es por ser un h3
   await expect(firstJobTitle).toHaveText('Desarrollador de Software Senior')
 })
 
@@ -25,7 +27,9 @@ test('Test de flujo completo de aplicación', async ({ page }) => {
 
   await page.getByRole('button', { name: 'Buscar' }).click()
 
-  const jobCards = page.locator('.cmp-job-card')
+  // const jobCards = page.locator('.cmp-job-card')
+  // Podemos obtenerlo por role
+  const jobCards = page.getByRole('article')
 
   const firstJob = jobCards.first()
   await expect(firstJob).toBeVisible()
@@ -60,6 +64,9 @@ test('Test de filtros', async ({ page }) => {
   const TYPE = 'remoto'
   const LEVEL = 'senior'
 
+  // Podemos agregar un `aria-label` en los selects (bueno por accesibilidad), y llamarlos así:
+  // await page.getByRole('combobox', { name: 'Tipo' }).selectOption(TYPE)
+  // await page.getByRole('combobox', { name: 'Nivel' }).selectOption(LEVEL)
   await page.getByTestId('type-filter').selectOption(TYPE)
   await page.getByTestId('level-filter').selectOption(LEVEL)
 
@@ -79,6 +86,8 @@ test('Test de paginación', async ({ page }) => {
 
   await page.getByRole('button', { name: 'Buscar' }).click()
 
+  // Podemos obtener por getByRole si damos una mejor accesibilidad a nuestra paginación:
+  // const pagination = page.getByRole('navigation', { name: 'Paginación' })
   const pagination = page.locator('.cmp-pagination')
   await expect(pagination).toBeVisible()
 
