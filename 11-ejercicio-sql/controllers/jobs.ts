@@ -6,8 +6,30 @@ export class JobController {
   // GET /jobs
   // Query params tipados
   static async getAll(req: Request<{}, {}, {}, JobFilters>, res: Response): Promise<void> {
-    const { tech, modality, level } = req.query
-    const jobs = await JobModel.getAll({ tech, modality, level })
+    const { tech, modality, level, limit, offset } = req.query
+
+    // Lo que hiciste no está mal, vamos a agregar filtros por limit y offset así te queda completo.
+    const requestedLimit = Number(limit)
+    const effectiveLimit =
+    // Con isIneger nos aseguramos de que no sea NaN, Infinity, -Infinity, y que sea un entero.
+      Number.isInteger(requestedLimit) && requestedLimit > 0
+        ? requestedLimit
+        : 10 // Esto lo podemos pasar a una variable global, lo usamos en diferentes lados, y con esto lo centralizamos
+
+    const requestedOffset = Number(offset)
+    const effectiveOffset =
+      Number.isInteger(requestedOffset) && requestedOffset >= 0
+        ? requestedOffset
+        : 0 // Lo mismo
+
+    const jobs = await JobModel.getAll({
+      tech,
+      modality,
+      level,
+      limit: effectiveLimit,
+      offset: effectiveOffset,
+    })
+
     res.json(jobs)
   }
 
