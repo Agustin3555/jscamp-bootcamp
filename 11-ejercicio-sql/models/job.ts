@@ -1,6 +1,6 @@
 import crypto from 'node:crypto'
 import { db } from '../db/database'
-import type { Job, CreateJobDTO, UpdateJobDTO, JobFilters } from '../types'
+import type { CreateJobDTO, Job, JobFilters, UpdateJobDTO } from '../types'
 
 const mapRowToJob = (row: any): Job => {
   const technologies = row.technologies
@@ -76,8 +76,12 @@ export class JobModel {
     }
 
     query += ` GROUP BY jobs.id ORDER BY jobs.title ASC`
+    query += ` LIMIT ? OFFSET ?`
 
-    const rows = db.prepare(query).all(...params)
+    // Agregamos a la query los parámetros de filtro por `limit` y `offset`
+    const rows = db
+      .prepare(query)
+      .all(...params, filters?.limit ?? 10, filters?.offset ?? 0)
     return rows.map(mapRowToJob)
   }
 
