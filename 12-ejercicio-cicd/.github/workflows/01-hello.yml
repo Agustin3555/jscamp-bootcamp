@@ -1,0 +1,25 @@
+name: 01 - Hello
+
+on: workflow_dispatch
+
+jobs:
+  saludar:
+    # No necesita actions/checkout porque solo ejecuta comandos que no dependen del código del repositorio
+    runs-on: ubuntu-24.04
+    steps:
+      - run: echo "Hola desde GitHub Actions!"
+
+      - name: Fecha actual
+        run: date
+
+      - name: Archivos disponibles
+        run: ls -la
+
+  repo-files:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Descargar código del repo
+        uses: actions/checkout@v6
+
+      - name: Archivos disponibles
+        run: ls -la
