@@ -29,4 +29,5 @@ runs:
       shell: bash
       run: |
         cd 12-ejercicio-cicd
-        pnpm install --frozen-lockfile --config.minimumReleaseAge=0
+        pnpm config set minimumReleaseAge 0
+        pnpm install --frozen-lockfile
