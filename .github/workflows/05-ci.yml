@@ -80,3 +80,19 @@ jobs:
           echo "::group::Smoke test"
           pnpm build:backend
           echo "::endgroup::"
+
+  frontend-test-matrix:
+    strategy:
+      matrix:
+        os: [ubuntu-24.04, macos-latest, windows-latest]
+        node: ['22', '24']
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: ./.github/actions/setup-pnpm-ci-cd
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Test
+        run: |
+          cd 12-ejercicio-cicd
+          pnpm test:frontend
