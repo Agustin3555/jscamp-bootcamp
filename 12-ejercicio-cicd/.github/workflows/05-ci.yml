@@ -6,6 +6,16 @@ on:
   pull_request:
     branches: [main]
 
+# Con esto cancelamos runs obsoletas del mismo ref (lo que evita trabajo duplicado cuando los push y PR coinciden)
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+# Todos los steps corren desde la raíz, con esto evitamos repetir `cd` en cada paso:
+defaults:
+  run:
+    working-directory: 12-ejercicio-cicd
+
 jobs:
   frontend-lint:
     runs-on: ubuntu-24.04
@@ -13,11 +23,12 @@ jobs:
       - uses: actions/checkout@v6
       - uses: ./.github/actions/setup-pnpm-ci-cd
       - name: Lint
-        run: |
-          cd 12-ejercicio-cicd
-          echo "::group::Lint"
-          pnpm lint:frontend
-          echo "::endgroup::"
+        # run: |
+        #   cd 12-ejercicio-cicd
+        #   echo "::group::Lint"
+        #   pnpm lint:frontend
+        #   echo "::endgroup::"
+        run: pnpm lint:frontend
 
   frontend-test:
     runs-on: ubuntu-24.04
@@ -25,11 +36,12 @@ jobs:
       - uses: actions/checkout@v6
       - uses: ./.github/actions/setup-pnpm-ci-cd
       - name: Test
-        run: |
-          cd 12-ejercicio-cicd
-          echo "::group::Test"
-          pnpm test:frontend
-          echo "::endgroup::"
+        # run: |
+        #   cd 12-ejercicio-cicd
+        #   echo "::group::Test"
+        #   pnpm test:frontend
+        #   echo "::endgroup::"
+        run: pnpm test:frontend
 
   frontend-build:
     needs: [frontend-lint, frontend-test]
@@ -38,11 +50,12 @@ jobs:
       - uses: actions/checkout@v6
       - uses: ./.github/actions/setup-pnpm-ci-cd
       - name: Build
-        run: |
-          cd 12-ejercicio-cicd
-          echo "::group::Build"
-          pnpm build:frontend
-          echo "::endgroup::"
+        # run: |
+        #   cd 12-ejercicio-cicd
+        #   echo "::group::Build"
+        #   pnpm build:frontend
+        #   echo "::endgroup::"
+        run: pnpm build:frontend
 
   backend-lint:
     runs-on: ubuntu-24.04
@@ -50,11 +63,12 @@ jobs:
       - uses: actions/checkout@v6
       - uses: ./.github/actions/setup-pnpm-ci-cd
       - name: Lint
-        run: |
-          cd 12-ejercicio-cicd
-          echo "::group::Lint"
-          pnpm lint:backend
-          echo "::endgroup::"
+        # run: |
+        #   cd 12-ejercicio-cicd
+        #   echo "::group::Lint"
+        #   pnpm lint:backend
+        #   echo "::endgroup::"
+        run: pnpm lint:backend
 
   backend-test:
     runs-on: ubuntu-24.04
@@ -62,11 +76,12 @@ jobs:
       - uses: actions/checkout@v6
       - uses: ./.github/actions/setup-pnpm-ci-cd
       - name: Test
-        run: |
-          cd 12-ejercicio-cicd
-          echo "::group::Test"
-          pnpm test:backend
-          echo "::endgroup::"
+        # run: |
+        #   cd 12-ejercicio-cicd
+        #   echo "::group::Test"
+        #   pnpm test:backend
+        #   echo "::endgroup::"
+        run: pnpm test:backend
 
   backend-build:
     needs: [backend-lint, backend-test]
@@ -74,12 +89,13 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - uses: ./.github/actions/setup-pnpm-ci-cd
-      - name: Build
-        run: |
-          cd 12-ejercicio-cicd
-          echo "::group::Smoke test"
-          pnpm build:backend
-          echo "::endgroup::"
+      - name: Build  # antes decía "Smoke test" por error de copia
+        # run: |
+        #   cd 12-ejercicio-cicd
+        #   echo "::group::Smoke test"
+        #   pnpm build:backend
+        #   echo "::endgroup::"
+        run: pnpm build:backend
 
   frontend-test-matrix:
     strategy:
@@ -93,6 +109,7 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
       - name: Test
-        run: |
-          cd 12-ejercicio-cicd
-          pnpm test:frontend
+        # run: |
+        #   cd 12-ejercicio-cicd
+        #   pnpm test:frontend
+        run: pnpm test:frontend
