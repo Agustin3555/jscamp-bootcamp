@@ -17,7 +17,12 @@ on:
       environment:
         description: 'Entorno de despliegue'
         required: true
-        type: environment
+        # type: environment  # solo lista envs ya definidas en el repo
+        type: choice        # más portable si aún no existen Environments creados. Es mejor en este caso.
+        options:
+          - development
+          - staging
+          - production
 
       dry_run:
         description: 'Ejecutar sin aplicar cambios'
