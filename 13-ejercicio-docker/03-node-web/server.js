@@ -5,7 +5,7 @@ const PORT = process.env.PORT || 3000
 const SALUDO = process.env.SALUDO || '¡Hola desde Node.js dentro de Docker! 🐳'
 
 app.get('/', (req, res) => {
-  console.log('[GET] /')
+  console.log('👉🏻 [GET] /')
 
   res.json({
     mensaje: SALUDO,
@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
 
 // Endpoint de salud, útil para HEALTHCHECK y orquestadores
 app.get('/health', (req, res) => {
-  console.log('[GET] /health')
+  console.log('👉🏻 [GET] /health')
   res.status(200).json({ status: 'ok' })
 })
 

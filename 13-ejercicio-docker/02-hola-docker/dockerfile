@@ -1,0 +1,4 @@
+FROM alpine
+
+# CMD ["echo", "Hola Docker"]
+CMD ["echo", "Hola desde mi primera imagen"]
